@@ -36,7 +36,7 @@ namespace Sitecore.Support.ExperienceEditor.Speak.Ribbon.Requests.LockItem
                 {
                     Item targetItem = link.GetTargetItem();
                     if (targetItem == null) continue;
-                    Item langSpecItem = targetItem.Database.GetItem(targetItem.ID, item.Language, item.Version);
+                    Item langSpecItem = targetItem.Database.GetItem(targetItem.ID, item.Language);
                     if (langSpecItem == null || !langSpecItem.Locking.IsLocked()) continue;
                     langSpecItem.Locking.Unlock();
                 }
