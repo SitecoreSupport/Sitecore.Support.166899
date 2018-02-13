@@ -30,7 +30,8 @@ namespace Sitecore.Support.ExperienceEditor.Speak.Ribbon.Requests.LockItem
         {
             if (item.Locking.IsLocked())
             {
-                ItemLink[] itemLinks = item.Links.GetValidLinks();
+                // Get links only for current item version
+                ItemLink[] itemLinks = item.Links.GetValidLinks(false);
                 item.Locking.Unlock();
                 foreach (ItemLink link in itemLinks)
                 {
