@@ -14,7 +14,7 @@ namespace Sitecore.Support.ExperienceEditor.Speak.Ribbon.Requests.LockItem
         public override PipelineProcessorResponseValue ProcessRequest()
         {
             base.RequestContext.ValidateContextItem();
-            Sitecore.Data.Items.Item item = this.SwitchLock(base.RequestContext.Item);
+            Item item = this.SwitchLock(base.RequestContext.Item);
             this.HandleVersionCreating(item);
             return new PipelineProcessorResponseValue
             {
@@ -43,19 +43,19 @@ namespace Sitecore.Support.ExperienceEditor.Speak.Ribbon.Requests.LockItem
                 }
                 return item;
             }
-            if (Sitecore.Context.User.IsAdministrator)
+            if (Context.User.IsAdministrator)
             {
                 item.Locking.Lock();
                 return item;
             }
-            return Sitecore.Context.Workflow.StartEditing(item);
+            return Context.Workflow.StartEditing(item);
         }
 
         private void HandleVersionCreating(Sitecore.Data.Items.Item finalItem)
         {
             if (base.RequestContext.Item.Version.Number != finalItem.Version.Number)
             {
-                Sitecore.Web.WebUtil.SetCookieValue(base.RequestContext.Site.GetCookieKey("sc_date"), string.Empty, DateTime.MinValue);
+                WebUtil.SetCookieValue(base.RequestContext.Site.GetCookieKey("sc_date"), string.Empty, DateTime.MinValue);
             }
         }
     }
